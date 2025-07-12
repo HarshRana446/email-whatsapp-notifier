@@ -58,15 +58,20 @@ ADMIN_SMS_TO=+91XXXXXXXXXX
 node app.js
 📲 API Usage (Postman)
 📤 POST /api/notify/signup
+
 Request Body (JSON):
+
 {
   "name": "Harsh Rana",
   "email": "ranaharsh669@gmail.com"
 }
+
 Response (Success):
 {
   "message": "Email, WhatsApp & SMS notifications sent successfully"
 }
+
+
 🔒 Important Notes
 📝 Twilio Sandbox: Join your sandbox by sending your unique code to +14155238886 on WhatsApp.
 
