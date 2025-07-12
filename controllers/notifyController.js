@@ -1,41 +1,48 @@
-const transporter = require("../config/mailer.js");
-const client = require("../config/twilio.js");
+const transporter = require("../config/mailer");
+const client = require("../config/twilio");
 
+// Send Notifications Controller
 exports.sendNotification = (req, res) => {
   const { name, email } = req.body;
 
-  // Send Email
+  // Email Options
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: email,
     subject: "Welcome to Our Service!",
-    text: `Hi ${name}, thank you for signing up and message sent!`,
+    text: `Hi ${name}, thank you for signing up.`,
   };
 
+  // Send Email
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error("Email sending error:", error);
       return res.status(500).send({ message: "Email Error" });
     }
 
-    console.log("✅ Email sent successfully!");
-
-    // Send WhatsApp
+    // Send WhatsApp Message
     client.messages
       .create({
         from: process.env.TWILIO_WHATSAPP_FROM,
         to: process.env.ADMIN_WHATSAPP_TO,
-        body: `New signup: ${name} (${email})`,
+        body: `📝 New signup: ${name} (${email})`,
       })
-      .then((message) => {
-        console.log("✅ WhatsApp message sent, SID:", message.sid);
-        return res.status(200).send({
-          message: "Email and WhatsApp notification sent successfully",
+      .then(() => {
+        // Send SMS Message
+        return client.messages.create({
+          from: process.env.TWILIO_SMS_FROM,
+          to: process.env.ADMIN_SMS_TO,
+          body: `New signup: ${name} (${email})`,
+        });
+      })
+      .then(() => {
+        res.status(200).send({
+          message: "Email, WhatsApp & SMS notifications sent successfully",
         });
       })
       .catch((err) => {
-        console.error("WhatsApp sending error:", err);
-        return res.status(500).send({ message: "WhatsApp Error" });
+        console.error("Notification error:", err);
+        res.status(500).send({ message: "Notification Error" });
       });
   });
 };
