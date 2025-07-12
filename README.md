@@ -24,28 +24,6 @@ A lightweight, scalable Node.js application that sends automated email notificat
 
 ---
 
-## 📂 Project Structure
-
-email-whatsapp-notifier/
-├── config/
-│ ├── mailer.js # Nodemailer setup
-│ └── twilio.js # Twilio client config
-│
-├── controllers/
-│ └── notifyController.js # API logic for sending notifications
-│
-├── routes/
-│ └── notifyRoutes.js # API routing
-│
-├── .gitignore
-├── .env # (not committed — for environment secrets)
-├── app.js # Main application entry point
-├── package.json
-└── README.md
-
-
----
-
 ## ⚙️ Setup & Installation
 
 ### 1️⃣ Clone the Repository
