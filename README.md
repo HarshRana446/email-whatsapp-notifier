@@ -64,15 +64,3 @@ Response (Success):
 ✅ Never commit .env or any sensitive credentials to public repositories.
 
 ✅ Use Gmail App Passwords for secure SMTP authentication.
-
-📄 Author
-Harsh Rana
-🚀 Full Stack Developer | AI & DevTools Enthusiast
-
-📧 ranaharsh669@gmail.com
-
-🌐 Portfolio Website
-
-🐙 GitHub
-
-💼 LinkedIn
